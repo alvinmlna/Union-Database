@@ -33,6 +33,10 @@
 #*.wixproj   merge=binary
 #*.modelproj merge=binary
 #*.sqlproj   merge=binary
+
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.html linguist-detectable=false
 #*.wwaproj   merge=binary
 
 ###############################################################################
