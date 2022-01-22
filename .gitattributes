@@ -34,9 +34,6 @@
 #*.modelproj merge=binary
 #*.sqlproj   merge=binary
 
-*.css linguist-detectable=false
-*.js linguist-detectable=false
-*.html linguist-detectable=false
 #*.wwaproj   merge=binary
 
 ###############################################################################
@@ -65,3 +62,9 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+
+
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.html linguist-detectable=false
