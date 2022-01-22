@@ -1,0 +1,34 @@
+﻿@model UnionDatabaseV1.DAL.User
+
+<li class="nav-item">
+    <a href="@Url.Action("Index", "Home")">Home</a>
+</li>
+
+@if (Model.Akses != 0)
+{
+    <li class="nav-item">
+        <a href="#">Manajemen Anggota</a>
+        <ul class="sub-menu">
+
+            @if (Model.Akses == 1)
+            {
+                <li><a href="@Url.Action("Index", "Members", new { puk = "all" })">Semua Anggota</a></li>
+            }
+
+            @Html.Action("ManajemenAnggota", "Layout")
+        </ul>
+    </li>
+}
+
+@if (Model.Akses == 1)
+{
+    <li class="nav-item">
+        <a href="#">Administrator</a>
+        <ul class="sub-menu">
+            <li><a href="@Url.Action("Index", "Puk")">PUK</a></li>
+            <li><a href="@Url.Action("Index", "Users")">Akses</a></li>
+            <li><a href="@Url.Action("Index", "FileManagers")">File Manager</a></li>
+        </ul>
+    </li>
+}
+

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<UnionDatabaseV1.DAL.PUK>
+
+@{
+    ViewBag.Title = "Manajemen PUK";
+}
+
+<div class="section-title mt-20">
+    <h5>Manajemen PUK</h5>
+</div>
+
+<br />
+
+<p>
+    @Html.ActionLink("Tambah PUK Baru", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            PUK
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PUK1)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

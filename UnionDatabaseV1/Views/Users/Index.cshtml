@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<UnionDatabaseV1.DAL.User>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="section-title mt-20">
+    <h5>Manajemen Akses</h5>
+</div>
+
+<br />
+
+
+<div style="float:left">
+    @Html.ActionLink("Tambah akses", "Create", null, new { @class = "btn btn-primary" })
+</div>
+
+<div style="float:right;">
+    @using (Html.BeginForm("Index", "Users", FormMethod.Get))
+    {
+        <div>
+            Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" class="btn btn-primary" value="Search" />
+        </div>
+    }
+</div>
+
+<div style="clear:both"></div>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            Member ID
+        </th>
+        <th>
+            Nama
+        </th>
+        <th>
+            Akses
+        </th>
+        <th>
+            PUK
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberName)
+            </td>
+            <td>
+                @if (item.Akses == 1)
+                {
+                    <p>Team Inti</p>
+                }
+                else
+                {
+                    <p>Admin PUK</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PUK1.PUK1)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, currentFilter = ViewBag.CurrentFilter }))

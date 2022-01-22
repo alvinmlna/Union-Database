@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<UnionDatabaseV1.DAL.Member>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Manajemen Anggota";
+}
+
+<div class="section-title mt-20">
+    <h5>Manajemen Anggota</h5>
+</div>
+
+<br />
+
+@if (ViewBag.puk != "all")
+{
+    <div style="float:left">
+        @Html.ActionLink("Tambah Manual", "Create", new { puk = ViewBag.puk }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Upload Excel", "Upload", new { puk = ViewBag.puk }, new { @class = "btn btn-primary" })
+    </div>
+}
+
+<div style="float:right;">
+    @using (Html.BeginForm("Index", "Members", FormMethod.Get))
+    {
+        <div>
+            Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            @Html.TextBox("puk", ViewBag.puk as string, new { @style = "display:none" })
+
+            <input type="submit" class="btn btn-primary" value="Search" />
+        </div>
+    }
+</div>
+
+<div style="clear:both"></div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            ID Anggota
+        </th>
+        <th>
+            Nama
+        </th>
+        <th>
+            Jenis Kelamin
+        </th>
+        <th>
+            PUK
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PUK.PUK1)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MemberID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MemberID })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, puk = ViewBag.puk }))

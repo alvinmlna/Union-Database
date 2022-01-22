@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UnionDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FileManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path" Type="varchar(max)" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="PUK_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="PUK_ID" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PUK">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PUK" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Akses" Type="int" Nullable="false" />
+          <Property Name="PUK" Type="int" />
+          <Property Name="MemberName" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_FileManager_PUK">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="FileManager" Type="Self.FileManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileManager">
+              <PropertyRef Name="PUK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_PUK">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="PUK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Members">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PUK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnionDatabaseModelStoreContainer">
+          <EntitySet Name="FileManager" EntityType="Self.FileManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PUK" EntityType="Self.PUK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FileManager_PUK" Association="Self.FK_FileManager_PUK">
+            <End Role="PUK" EntitySet="PUK" />
+            <End Role="FileManager" EntitySet="FileManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_PUK" Association="Self.FK_Members_PUK">
+            <End Role="PUK" EntitySet="PUK" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Members" Association="Self.FK_Users_Members">
+            <End Role="PUK" EntitySet="PUK" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UnionDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FileManager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="PUK_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PUK" Relationship="Self.FK_FileManager_PUK" FromRole="FileManager" ToRole="PUK" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PUK_ID" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PUK" Relationship="Self.FK_Members_PUK" FromRole="Members" ToRole="PUK" />
+        </EntityType>
+        <EntityType Name="PUK">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PUK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FileManagers" Relationship="Self.FK_FileManager_PUK" FromRole="PUK" ToRole="FileManager" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_Members_PUK" FromRole="PUK" ToRole="Members" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Members" FromRole="PUK" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Akses" Type="Int32" Nullable="false" />
+          <Property Name="PUK" Type="Int32" />
+          <NavigationProperty Name="PUK1" Relationship="Self.FK_Users_Members" FromRole="Users" ToRole="PUK" />
+          <Property Name="MemberName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_FileManager_PUK">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="FileManager" Type="Self.FileManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileManager">
+              <PropertyRef Name="PUK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_PUK">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="Members" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="PUK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Members">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PUK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConnectionString" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FileManagers" EntityType="Self.FileManager" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="PUKs" EntityType="Self.PUK" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_FileManager_PUK" Association="Self.FK_FileManager_PUK">
+            <End Role="PUK" EntitySet="PUKs" />
+            <End Role="FileManager" EntitySet="FileManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_PUK" Association="Self.FK_Members_PUK">
+            <End Role="PUK" EntitySet="PUKs" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Members" Association="Self.FK_Users_Members">
+            <End Role="PUK" EntitySet="PUKs" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UnionDatabaseModelStoreContainer" CdmEntityContainer="ConnectionString">
+          <EntitySetMapping Name="FileManagers">
+            <EntityTypeMapping TypeName="UnionDatabaseModel.FileManager">
+              <MappingFragment StoreEntitySet="FileManager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="PUK_ID" ColumnName="PUK_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="UnionDatabaseModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PUK_ID" ColumnName="PUK_ID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PUKs">
+            <EntityTypeMapping TypeName="UnionDatabaseModel.PUK">
+              <MappingFragment StoreEntitySet="PUK">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PUK1" ColumnName="PUK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="UnionDatabaseModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="Akses" ColumnName="Akses" />
+                <ScalarProperty Name="PUK" ColumnName="PUK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

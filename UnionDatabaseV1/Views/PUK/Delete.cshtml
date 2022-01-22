@@ -1,0 +1,31 @@
+﻿@model UnionDatabaseV1.DAL.PUK
+
+@{
+    ViewBag.Title = "PUK";
+}
+
+<h2>PUK</h2>
+
+<h3>Anda yakin akan menghapus PUK berikut?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PUK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PUK1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Hapus" class="btn btn-default" /> |
+            @Html.ActionLink("Kembali ke list manajemen PUK", "Index")
+        </div>
+    }
+</div>

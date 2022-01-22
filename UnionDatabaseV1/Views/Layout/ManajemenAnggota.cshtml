@@ -1,0 +1,7 @@
+﻿@model IEnumerable<string>
+
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("Index", "Members", new { puk = item })">@item</a></li>
+}

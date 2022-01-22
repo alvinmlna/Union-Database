@@ -1,0 +1,65 @@
+﻿@model IEnumerable<UnionDatabaseV1.DAL.FileManager>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="section-title mt-20">
+    <h5>File Manager</h5>
+</div>
+
+<br />
+
+<p>
+    @Html.ActionLink("Tambah Baru", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            PUK
+        </th>
+        <th>
+            Gambar
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if (item.Category == 1)
+                {
+                    <p>Tampil di semua PUK</p>
+                }
+                else
+                {
+                    <p>PUK Tertentu</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PUK.PUK1)
+            </td>
+            <td>
+                <img src="@Url.Content("/UploadedFiles/" + item.Path)" alt="" height=100 width=200 />
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

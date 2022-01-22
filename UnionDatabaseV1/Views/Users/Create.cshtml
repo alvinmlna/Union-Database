@@ -1,0 +1,101 @@
+﻿@model UnionDatabaseV1.DAL.User
+
+@{
+    ViewBag.Title = "Tambah Akses Baru";
+}
+
+<h2>Akses</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Tambah Akses Baru</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.MemberID, "Member", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MemberID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MemberID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Akses, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(x => x.Akses, new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="Team Inti", Value = "1" },
+                    new SelectListItem{ Text="Admin PUK", Value = "2" },
+                }, new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.Akses, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none" id="PUKView">
+            @Html.LabelFor(model => model.PUK, "PUK", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PUK", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PUK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<div>
+    @Html.ActionLink("Kembali ke List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+
+        $(document).ready(function () {
+            $("#MemberID").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.Action("SearchMember", "Members")",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Value + " - " + item.Name, value: item.Value };
+                            }))
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+        })
+
+        $("#Akses").change(function () {
+
+
+            var value = $("#Akses").val();
+
+            if (value == "1") {
+                $("#PUKView").hide();
+
+            } else {
+                $("#PUKView").show();
+            }
+        });
+
+
+</script>
+}

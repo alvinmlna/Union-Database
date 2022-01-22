@@ -1,0 +1,63 @@
+﻿@model UnionDatabaseV1.DAL.FileManager
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>File Manager</h2>
+
+<h3>Anda yakin ingin menghapus data berikut?</h3>
+<div>
+    <h4>FileManager</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        @if (Model.Category == 1)
+        {
+            <dd>Tampil di semua PUK</dd>
+        }
+        else
+        {
+            <dd>PUK Tertentu</dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PUK.PUK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PUK.PUK1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Path)
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("/UploadedFiles/" + Model.Path)" alt="" height=100 width=200 />
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

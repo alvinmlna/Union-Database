@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model IEnumerable<UnionDatabaseV1.DAL.FileManager>
+
+<style>
+    .carousel-control-next,
+    .carousel-control-prev /*, .carousel-indicators */ {
+        filter: invert(100%);
+    }
+
+    .carousel-control-prev {
+        margin-left: -150px !important;
+    }
+    
+    .carousel-control-next {
+        margin-right: -150px !important;
+    }
+
+    .carousel-control.right {
+        margin-left: 15px;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    @*<ol class="carousel-indicators">
+
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <li data-target="#carouselExampleIndicators" data-slide-to="@i+2"></li>
+        }
+    </ol>*@
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <canvas id="myChart"></canvas>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="carousel-item">
+                <img src="@Url.Content("/UploadedFiles/" + item.Path)" alt="" class="d-block w-100" />
+            </div>
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $.ajax({
+            type: "POST",
+            url: "/Home/NewChart",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (chData) {
+                var aData = chData;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                var dataT = {
+                    labels: aLabels,
+                    datasets: [{
+                        label: "Jumlah: ",
+                        data: aDatasets1,
+                        fill: false,
+                        backgroundColor: [
+                            "#3366cc",
+                            "#dc3912",
+                            "#ff9900",
+                            "#109618",
+                            "#990099",
+                            "#0099c6",
+                            "#dd4477",
+                            "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac", "#b77322", "#16d620", "#b91383", "#f4359e", "#9c5935", "#a9c413", "#2a778d", "#668d1c", "#bea413", "#0c5922", "#743411"
+                        ]
+                    }]
+                };
+                var ctx = $("#myChart").get(0).getContext("2d");
+                var myNewChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: dataT,
+                    plugins: [ChartDataLabels],
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            datalabels: {
+                                color: '#000000',
+                                display: true,
+                                align: 'top',
+                                anchor: 'end'
+                            },
+                            title: {
+                                display: true,
+                                text: 'All Data'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>  
+}

@@ -1,0 +1,12 @@
+﻿@model UnionDatabaseV1.DAL.User
+
+
+@if (Model.MemberID == "0000")
+{
+    <div class="button float-left">
+        <button type="button" class="main-btn" data-toggle="modal" data-target="#myModal">Login</button>
+    </div>
+} else
+{
+    <span>Hi, @Model.MemberName @Html.ActionLink("Logout", "Logout", "Layout", null, null)</span>
+}
