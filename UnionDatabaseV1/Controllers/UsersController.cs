@@ -134,23 +134,28 @@ namespace UnionDatabaseV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MemberID,Akses,PUK")] User user)
+        public ActionResult Edit([Bind(Include = "Id,MemberID,Akses,PUK,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                if (user.Akses == 1) //admin
-                {
-                    user.PUK = null;
-                }
-
                 var tobeUpdate = db.Users.FirstOrDefault(x => x.Id == user.Id);
                 tobeUpdate.Akses = user.Akses;
                 tobeUpdate.PUK = user.PUK;
+
+                if (user.Akses == 1) //admin
+                {
+                    tobeUpdate.PUK = null;
+                }
+                    else
+                {
+                    tobeUpdate.Password = "";
+                }
 
                 db.Entry(tobeUpdate).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Name", user.MemberID);
             ViewBag.PUK = new SelectList(db.PUKs, "Id", "PUK1", user.PUK);
             return View(user);
