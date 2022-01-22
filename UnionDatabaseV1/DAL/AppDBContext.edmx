@@ -40,6 +40,7 @@
           <Property Name="Akses" Type="int" Nullable="false" />
           <Property Name="PUK" Type="int" />
           <Property Name="MemberName" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_FileManager_PUK">
           <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
@@ -140,6 +141,7 @@
           <Property Name="PUK" Type="Int32" />
           <NavigationProperty Name="PUK1" Relationship="Self.FK_Users_Members" FromRole="Users" ToRole="PUK" />
           <Property Name="MemberName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_FileManager_PUK">
           <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
@@ -233,6 +235,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="UnionDatabaseModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="MemberName" ColumnName="MemberName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />

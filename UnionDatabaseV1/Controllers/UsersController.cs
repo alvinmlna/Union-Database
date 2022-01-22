@@ -85,13 +85,17 @@ namespace UnionDatabaseV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MemberID,Akses,PUK")] User user)
+        public ActionResult Create([Bind(Include = "Id,MemberID,Akses,PUK,Password")] User user)
         {
             if (ModelState.IsValid)
             {
                 if (user.Akses == 1 ) //admin
                 {
                     user.PUK = null;
+                }
+                else 
+                {
+                    user.Password = "";
                 }
 
                 var member = memberService.FindByMemberId(user.MemberID);

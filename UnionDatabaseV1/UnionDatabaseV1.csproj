@@ -192,9 +192,9 @@
     <Compile Include="DAL\User.cs">
       <DependentUpon>AppDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\IService\IAppCoreService.cs" />
+    <Compile Include="Data\IService\IMemberService.cs" />
     <Compile Include="Data\Services\AppCoreService.cs" />
-    <Compile Include="Data\Services\IAppCoreService.cs" />
-    <Compile Include="Data\Services\IMemberService.cs" />
     <Compile Include="Data\Services\MemberService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

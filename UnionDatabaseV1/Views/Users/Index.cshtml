@@ -45,6 +45,9 @@
         <th>
             PUK
         </th>
+        <th>
+            Password
+        </th>
         <th></th>
     </tr>
 
@@ -69,6 +72,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PUK1.PUK1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

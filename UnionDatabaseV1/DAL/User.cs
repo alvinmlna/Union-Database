@@ -11,18 +11,15 @@ namespace UnionDatabaseV1.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class User
     {
         public int Id { get; set; }
-
-        [Required]
         public string MemberID { get; set; }
         public int Akses { get; set; }
         public Nullable<int> PUK { get; set; }
-
         public string MemberName { get; set; }
+        public string Password { get; set; }
     
         public virtual PUK PUK1 { get; set; }
     }
