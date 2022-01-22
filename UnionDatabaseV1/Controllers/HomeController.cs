@@ -69,5 +69,23 @@ namespace UnionDatabaseV1.Controllers
             //Source data returned as JSON  
             return Json(iData, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult Login(string Username, string Password)
+        {
+            var loginStatus = coreService.Login(Username, Password);
+            if (loginStatus != null)
+            {
+                if (loginStatus == true)
+                {
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                return Json("Password salah", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Anggota tidak ditemukan", JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

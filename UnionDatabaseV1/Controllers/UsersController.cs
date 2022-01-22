@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using UnionDatabaseV1.DAL;
 using UnionDatabaseV1.Data.Services;
+using UnionDatabaseV1.Security;
 
 namespace UnionDatabaseV1.Controllers
 {
+    [UserAuthorization(Roles = "1")]
     public class UsersController : Controller
     {
         private ConnectionString db = new ConnectionString();
@@ -205,22 +207,6 @@ namespace UnionDatabaseV1.Controllers
             base.Dispose(disposing);
         }
 
-        [HttpPost]
-        public JsonResult Login(string Username, string Password)
-        {
-            var loginStatus = appCoreService.Login(Username, Password);
-            if (loginStatus != null)
-            {
-                if (loginStatus == true)
-                {
-                    return Json("success", JsonRequestBehavior.AllowGet);
-                }
-                return Json("Password salah", JsonRequestBehavior.AllowGet);
-            } 
-                else
-            {
-                return Json("Anggota tidak ditemukan", JsonRequestBehavior.AllowGet);
-            }
-        }
+
     }
 }

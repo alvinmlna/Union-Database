@@ -10,11 +10,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using UnionDatabaseV1.DAL;
 using UnionDatabaseV1.Data.Services;
+using UnionDatabaseV1.Security;
 
 namespace UnionDatabaseV1.Controllers
 {
+    [UserAuthorization(Roles = "1,2")]
     public class MembersController : Controller
     {
         private readonly IAppCoreService appCoreService;
@@ -41,8 +44,6 @@ namespace UnionDatabaseV1.Controllers
             var akses = appCoreService.IsHaveAccessToThisArea(puk);
             if (akses == false)
                 return View("NoAccess");
-
-
 
             ViewBag.puk = puk;
             IEnumerable<Member> members;
@@ -75,7 +76,7 @@ namespace UnionDatabaseV1.Controllers
                 members = members.Where(s => s.Name.Contains(searchString) || s.MemberID.Contains(searchString));
             }
 
-            members = members.OrderBy(s => s.PUK).ThenBy(x => x.MemberID);
+            members = members.OrderBy(s => s.PUK.PUK1).ThenBy(x => x.MemberID);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);

@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using UnionDatabaseV1.DAL;
+using UnionDatabaseV1.Security;
 
 namespace UnionDatabaseV1.Controllers
 {
+    [UserAuthorization(Roles = "1")]
     public class PUKController : Controller
     {
         private ConnectionString db = new ConnectionString();
