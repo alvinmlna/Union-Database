@@ -12,6 +12,7 @@ namespace UnionDatabaseV1.Data.Services
         IEnumerable<Member> GeAll();
 
         Member FindByMemberId(string memberId);
+        User FindAccessByMemberId(string memberId);
 
         bool DeleteByPUK(string puk);
         IEnumerable<ChartModel> GetChart();

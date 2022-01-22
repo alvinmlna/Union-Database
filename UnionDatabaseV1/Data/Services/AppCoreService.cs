@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using UnionDatabaseV1.DAL;
+using UnionDatabaseV1.Data._enum;
 
 namespace UnionDatabaseV1.Data.Services
 {
     public class AppCoreService : IAppCoreService
     {
         private readonly ConnectionString db;
+        private readonly IMemberService memberService;
 
-        public AppCoreService(ConnectionString db)
+        public AppCoreService(
+            ConnectionString db,
+            IMemberService memberService)
         {
             this.db = db;
+            this.memberService = memberService;
         }
         
         public User GetCurrentUser()
@@ -48,9 +53,28 @@ namespace UnionDatabaseV1.Data.Services
             }
         }
 
-        public void Login(string memberId)
+        public bool? Login(string memberId, string password)
         {
-            HttpContext.Current.Session["CurrentUser"] = memberId;
+            var getUser = memberService.FindAccessByMemberId(memberId);
+            if (getUser != null)
+            {
+                if (getUser.Akses == (int)AccessEnum.Inti || getUser.Akses == (int)AccessEnum.Admin)
+                {
+                    if (getUser.Password == password)
+                    {
+                        HttpContext.Current.Session["CurrentUser"] = memberId;
+                        return true;
+                    }
+                    return false;
+                } 
+                    else
+                {
+                    HttpContext.Current.Session["CurrentUser"] = memberId;
+                    return true;
+                } 
+            }
+
+            return null;
         }
 
         public bool IsHaveAccessToThisArea(string puk)

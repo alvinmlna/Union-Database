@@ -196,6 +196,7 @@
     <Compile Include="Data\IService\IMemberService.cs" />
     <Compile Include="Data\Services\AppCoreService.cs" />
     <Compile Include="Data\Services\MemberService.cs" />
+    <Compile Include="Data\_enum\AccessEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

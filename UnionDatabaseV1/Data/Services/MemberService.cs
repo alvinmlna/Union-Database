@@ -51,6 +51,11 @@ namespace UnionDatabaseV1.Data.Services
             return context.Members.FirstOrDefault(x => x.MemberID == memberId);
         }
 
+        public User FindAccessByMemberId(string memberId)
+        {
+            return context.Users.FirstOrDefault(x => x.MemberID == memberId);
+        }
+
         public IEnumerable<Member> GeAll()
         {
             return context.Members.ToList();

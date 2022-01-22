@@ -89,21 +89,29 @@ namespace UnionDatabaseV1.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (user.Akses == 1 ) //admin
-                {
-                    user.PUK = null;
-                }
-                else 
-                {
-                    user.Password = "";
-                }
-
                 var member = memberService.FindByMemberId(user.MemberID);
-                user.MemberName = member?.Name;
+                if (member != null)
+                {
+                    user.MemberName = member.Name;
+                    if (user.Akses == 1) //admin
+                    {
+                        user.PUK = null;
+                    }
+                    else
+                    {
+                        user.Password = "";
+                    }
 
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                } else
+                {
+                    ModelState.AddModelError("MemberID", "Anggota tidak ditemukan, mohon ditambahkan terlebih dahulu.");
+                    ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Name", user.MemberID);
+                    ViewBag.PUK = new SelectList(db.PUKs, "Id", "PUK1", user.PUK);
+                    return View(user);
+                }
             }
 
             ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Name", user.MemberID);
@@ -200,35 +208,19 @@ namespace UnionDatabaseV1.Controllers
         [HttpPost]
         public JsonResult Login(string Username, string Password)
         {
-            var db = memberService.FindByMemberId(Username);
-            var akses = this.db.Users.FirstOrDefault(x => x.MemberID == Username);
-
-            if (db !=null)
+            var loginStatus = appCoreService.Login(Username, Password);
+            if (loginStatus != null)
             {
-                //jika admin wajib isi password
-                if (akses?.Akses == 1 || akses?.Akses == 2)
+                if (loginStatus == true)
                 {
-                    if (Password == "Union2022")
-                    {
-                        appCoreService.Login(Username);
-                        return Json("success", JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                    {
-                        return Json("Password salah", JsonRequestBehavior.AllowGet);
-                    }
-                } else
-                {
-                    appCoreService.Login(Username);
                     return Json("success", JsonRequestBehavior.AllowGet);
                 }
-            }
-            else
+                return Json("Password salah", JsonRequestBehavior.AllowGet);
+            } 
+                else
             {
                 return Json("Anggota tidak ditemukan", JsonRequestBehavior.AllowGet);
             }
-
-
         }
     }
 }

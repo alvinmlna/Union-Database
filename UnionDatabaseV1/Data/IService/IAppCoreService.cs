@@ -10,7 +10,7 @@ namespace UnionDatabaseV1.Data.Services
     {
         //Check apakah user ini memiliki akses untuk mengelola puk
         bool IsHaveAccessToThisArea(string puk);
-        void Login(string memberId);
+        bool? Login(string memberId, string password);
 
         User GetCurrentUser();
 
