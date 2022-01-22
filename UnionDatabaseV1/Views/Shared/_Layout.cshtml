@@ -30,24 +30,18 @@
     <header id="header-part">
 
 
-        <div class="header-logo-support pt-30 pb-30">
+        <div class="header-logo-support pt-10 pb-10" style="background-color: #f05128">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
                         <div class="logo">
                             <a href="index-2.html">
-                                <img src="@Url.Content("~/lib/images/logo.png")" alt="Logo">
+                                <img src="@Url.Content("~/Content/img/header.png")" style="max-width:120%!important" alt="Logo">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-8">
-                        <div class="support-button float-right d-none d-md-block">
-                            <div class="support float-left">
-                                <div class="icon">
-                                </div>
-                                <div class="cont">
-                                </div>
-                            </div>
+                    <div class="col-lg-8 col-md-8 pt-10">
+                        <div class="float-right d-none d-md-block">
                             @Html.Action("Login", "Layout")
                         </div>
                     </div>
@@ -127,7 +121,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Sistem Manajemen PUK</p>
+            <p>&copy; @DateTime.Now.Year - PUK management syste</p>
         </footer>
     </div>
 
