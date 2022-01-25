@@ -56,9 +56,11 @@ namespace UnionDatabaseV1.Data.Services
         public bool? Login(string memberId, string password)
         {
             var getUser = memberService.FindAccessByMemberId(memberId);
-            if (getUser != null)
+            var getMember = memberService.FindByMemberId(memberId);
+
+            if (getUser != null || getMember != null)
             {
-                if (getUser.Akses == (int)AccessEnum.Inti || getUser.Akses == (int)AccessEnum.Admin)
+                if (getUser?.Akses == (int)AccessEnum.Inti || getUser?.Akses == (int)AccessEnum.Admin)
                 {
                     if (getUser.Password == password)
                     {
