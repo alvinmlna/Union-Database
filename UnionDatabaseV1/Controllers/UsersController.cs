@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UnionDatabaseV1.DAL;
+using UnionDatabaseV1.Data._enum;
 using UnionDatabaseV1.Data.Services;
 using UnionDatabaseV1.Security;
 
@@ -95,7 +96,7 @@ namespace UnionDatabaseV1.Controllers
                 if (member != null)
                 {
                     user.MemberName = member.Name;
-                    if (user.Akses == 1) //admin
+                    if (user.Akses == (int)AccessEnum.Admin || user.Akses == (int)AccessEnum.Inti) //admin
                     {
                         user.PUK = null;
                     }
@@ -152,9 +153,10 @@ namespace UnionDatabaseV1.Controllers
                 tobeUpdate.Akses = user.Akses;
                 tobeUpdate.PUK = user.PUK;
 
-                if (user.Akses == 1) //admin
+                if (user.Akses == (int)AccessEnum.Admin || user.Akses ==  (int)AccessEnum.Inti) //admin
                 {
                     tobeUpdate.PUK = null;
+                    tobeUpdate.Password = user.Password;
                 }
                     else
                 {
