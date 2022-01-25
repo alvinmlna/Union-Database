@@ -11,18 +11,13 @@ namespace UnionDatabaseV1.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class FileManager
     {
         public int Id { get; set; }
         public string Path { get; set; }
-
-        [Required]
         public string Name { get; set; }
         public int Category { get; set; }
-
-        [Required]
         public int PUK_ID { get; set; }
     
         public virtual PUK PUK { get; set; }

@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="89ca76d402604ba4847d980d396cdbe2" Name="Diagram1">
-        <EntityTypeShape EntityType="UnionDatabaseModel.FileManager" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnionDatabaseModel.Member" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnionDatabaseModel.PUK" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnionDatabaseModel.User" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <AssociationConnector Association="UnionDatabaseModel.FK_FileManager_PUK" ManuallyRouted="false" />
-        <AssociationConnector Association="UnionDatabaseModel.FK_Members_PUK" ManuallyRouted="false" />
-        <AssociationConnector Association="UnionDatabaseModel.FK_Users_Members" ManuallyRouted="false" />
+      <Diagram DiagramId="b23febe69ca54140acc127778041f6bd" Name="Diagram1">
+        <EntityTypeShape EntityType="attire_dbModel.FileManager" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="attire_dbModel.Member" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="attire_dbModel.PUK" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="attire_dbModel.User" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="attire_dbModel.FK_FileManager_PUK" ManuallyRouted="false" />
+        <AssociationConnector Association="attire_dbModel.FK_Members_PUK" ManuallyRouted="false" />
+        <AssociationConnector Association="attire_dbModel.FK_Users_Members" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

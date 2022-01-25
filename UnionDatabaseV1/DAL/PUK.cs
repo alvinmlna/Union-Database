@@ -11,28 +11,25 @@ namespace UnionDatabaseV1.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PUK
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PUK()
         {
-            this.FileManagers = new HashSet<FileManager>();
-            this.Members = new HashSet<Member>();
-            this.Users = new HashSet<User>();
+            this.FileManager = new HashSet<FileManager>();
+            this.Member = new HashSet<Member>();
+            this.User = new HashSet<User>();
         }
     
         public int Id { get; set; }
-
-        [Required]
         public string PUK1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FileManager> FileManagers { get; set; }
+        public virtual ICollection<FileManager> FileManager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Member> Members { get; set; }
+        public virtual ICollection<Member> Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }

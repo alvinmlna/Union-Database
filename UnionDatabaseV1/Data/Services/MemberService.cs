@@ -26,7 +26,7 @@ namespace UnionDatabaseV1.Data.Services
             var memberIds = string.Join("','", toDelete);
             using (context)
             {
-                string sql = ("DELETE FROM Members WHERE MemberID in ('" + memberIds +  "')");
+                string sql = ("DELETE FROM [Union].[Member] WHERE MemberID in ('" + memberIds +  "')");
                 var result = context.Database.ExecuteSqlCommand(sql);
                 if (result > 0)
                 {
@@ -40,7 +40,7 @@ namespace UnionDatabaseV1.Data.Services
         public IEnumerable<ChartModel> GetChart()
         {
             IEnumerable<ChartModel> result =  null;
-            string sql = ("select PUK, count(*) as [Count] from Members m, PUK p where m.PUK_ID = p.Id group by puk order by Count desc");
+            string sql = ("select PUK1, count(*) as [Count] from [Union].[Member] m, [Union].[PUK] p where m.PUK_ID = p.Id group by PUK1 order by Count desc");
             result  = context.Database.SqlQuery<ChartModel>(sql);
 
             return result.ToList();
