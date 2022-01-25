@@ -21,7 +21,7 @@ namespace UnionDatabaseV1.Controllers
         // GET: FileManagers
         public ActionResult Index()
         {
-            var fileManagers = db.FileManagers.Include(f => f.PUK);
+            var fileManagers = db.FileManagers;
             return View(fileManagers.ToList());
         }
 
@@ -64,6 +64,12 @@ namespace UnionDatabaseV1.Controllers
 
                     fileManager.Path = _FileName;
                 }
+
+                if (fileManager.Category == 1) //Semua area
+                {
+                    fileManager.PUK_ID = null;
+                }
+
 
                 db.FileManagers.Add(fileManager);
                 db.SaveChanges();
