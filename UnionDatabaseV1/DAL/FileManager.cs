@@ -18,7 +18,7 @@ namespace UnionDatabaseV1.DAL
         public string Path { get; set; }
         public string Name { get; set; }
         public int Category { get; set; }
-        public int PUK_ID { get; set; }
+        public Nullable<int> PUK_ID { get; set; }
     
         public virtual PUK PUK { get; set; }
     }
