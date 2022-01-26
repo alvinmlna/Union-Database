@@ -4,19 +4,16 @@
     <a href="@Url.Action("Index", "Home")">Home</a>
 </li>
 
+
+
 @if (Model.Akses != 0)
 {
+
+    @Html.Action("ManajemenAnggota", "Layout")
+
+
     <li class="nav-item">
-        <a href="#">Manajemen Anggota</a>
-        <ul class="sub-menu">
-
-            @if (Model.Akses == 1)
-            {
-                <li><a href="@Url.Action("Index", "Members", new { puk = "all" })">Semua Anggota</a></li>
-            }
-
-            @Html.Action("ManajemenAnggota", "Layout")
-        </ul>
+        <ul class="sub-menu"></ul>
     </li>
 }
 

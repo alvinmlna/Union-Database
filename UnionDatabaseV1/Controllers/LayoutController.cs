@@ -40,7 +40,7 @@ namespace UnionDatabaseV1.Controllers
                 pukList = db.PUKs.Where(x => x.Id == currentUser.PUK).Select(x => x.PUK1);
             };
 
-            return PartialView("ManajemenAnggota", pukList);
+            return PartialView("ManajemenAnggota", pukList.ToList());
         }
 
 

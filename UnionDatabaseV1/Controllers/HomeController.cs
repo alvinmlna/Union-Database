@@ -36,6 +36,12 @@ namespace UnionDatabaseV1.Controllers
                 image = image.Concat(imageSpecificPUK);
             }
 
+            var allEmployee = db.Members;
+
+            ViewBag.TotalEmployee = allEmployee.Count();
+            ViewBag.Male = allEmployee.Where(x => x.Gender == "Laki-laki").Count();
+            ViewBag.Female = allEmployee.Where(x => x.Gender == "Perempuan").Count();
+
 
             return View(image.ToList());
         }

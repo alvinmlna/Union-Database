@@ -11,6 +11,44 @@
     <title>@ViewBag.Title</title>
 
     @Styles.Render("~/Content/admin")
+
+    <style>
+        .dropdown-menu {
+        m   in-width: 200px;
+        }
+            .dropdown-menu.columns-2 {
+                min-width: 400px;
+            }
+            .dropdown-menu.columns-3 {
+                min-width: 600px;
+            }
+            .dropdown-menu li a {
+                padding: 5px 15px;
+                font-weight: 300;
+            }
+            .multi-column-dropdown {
+                list-style: none;
+            }
+            .multi-column-dropdown li a {
+                display: block;
+                clear: both;
+                line-height: 1.428571429;
+                color: #333;
+                white-space: normal;
+            }
+            .multi-column-dropdown li a:hover {
+                text-decoration: none;
+                color: #262626;
+                background-color: #f5f5f5;
+            }
+
+            @@media (max-width: 767px) {
+                .dropdown-menu.multi-column {
+                    min-width: 240px !important;
+                    overflow-x: hidden;
+                }
+            }
+    </style>
 </head>
 <body>
     <div class="preloader">
@@ -36,18 +74,21 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="logo">
                             <a href="index-2.html">
-                                <img src="@Url.Content("~/Content/img/header.png")" style="max-width:120%!important" alt="Logo">
+                                <img src="@Url.Content("~/Content/img/header.png")" style="max-width:250%!important" alt="Logo">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 pt-10">
-                        <div class="float-right d-none d-md-block">
+                        <div class="float-right d-none d-md-block mt-40">
                             @Html.Action("Login", "Layout")
                         </div>
                     </div>
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header logo support -->
+
+
+        <!--/.navbar-->
 
         <div class="navigation">
             <div class="container">
@@ -59,7 +100,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-
+                           
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     @Html.Action("NavBar", "Layout")
@@ -158,6 +199,25 @@
             });
         });
 
+        $('li.has-mega-menu').each(function (idx, val) {
+            var set = 6, //Number of links to display in each column
+                buffer = [],
+                dropdown = $('.dropdown-menu', this),
+                children = dropdown.children(),
+                cols = Math.ceil(children.length / set),
+                col_class = 'col-6 col-md-' + (cols >= 5 ? '2' : (cols == 4 ? '3' : (cols == 3 ? '4' : 'x'))),
+                container_class = 'px-0 container container-' + (cols == 2 ? 'sm' : (cols == 3 ? 'md' : (cols == 4 ? 'lg' : (cols >= 5 ? 'xl' : 'x'))));
+
+            for (var i = 0; i < cols; i++) {
+                buffer.push('<div class="' + col_class + '">');
+                children.slice(i * set, (i + 1) * set).each(function () {
+                    buffer.push($(this).prop('outerHTML'));
+                });
+                buffer.push('</div>');
+            }
+
+            dropdown.html('<div class="' + container_class + '"><div class="row">' + buffer.join('\n') + '</div></div>');
+        });
     </script>
 
 </body>
