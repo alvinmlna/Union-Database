@@ -21,8 +21,8 @@
     @using (Html.BeginForm("Index", "Users", FormMethod.Get))
     {
         <div>
-            Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" class="btn btn-primary" value="Search" />
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" class="btn btn-primary" value="Cari" />
         </div>
     }
 </div>
@@ -78,7 +78,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Hapus", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
