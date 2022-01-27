@@ -32,19 +32,21 @@ namespace UnionDatabaseV1
                       "~/lib/css/slick.css",
                       "~/lib/css/bootstrap.min.css",
                       "~/lib/css/font-awesome.min.css",
-                      "~/Content/jquery-ui.min.css",
+                      "~/lib/jh/jquery-ui-1.10.4.custom.min.css",
                       "~/Content/PagedList.css",
                       "~/lib/css/default.css",
                       "~/lib/css/style.css",
+                      "~/lib/jh/jHTree.css",
                       "~/lib/css/responsive.css"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
                       "~/lib/js/vendor/modernizr-3.6.0.min.js",
                       "~/Scripts/jquery.js",
-                      "~/Scripts/jquery-ui.min.js",
+                      "~/lib/jh/jquery-ui-1.10.4.custom.min.js",
                       "~/lib/js/bootstrap.min.js",
                       "~/lib/js/slick.min.js",
+                      "~/lib/jh/jQuery.jHTree.js",
                       "~/lib/js/main.js"));
         }
     }

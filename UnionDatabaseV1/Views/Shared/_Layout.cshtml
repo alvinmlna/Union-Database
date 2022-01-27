@@ -86,8 +86,6 @@
                 </div> <!-- row -->
             </div> <!-- container -->
         </div> <!-- header logo support -->
-
-
         <!--/.navbar-->
 
         <div class="navigation">
@@ -100,7 +98,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                           
+
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
                                     @Html.Action("NavBar", "Layout")
@@ -157,12 +155,21 @@
         </div>
     </div>
 
+    <hr />
+    @{
+        var cont = "container";
+    }
 
-    <div class="container body-content">
+    @if (ViewBag.removeContainer != null)
+    {
+        cont = "container-fluid";
+    }
+
+    <div class="@cont body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - PUK management syste</p>
+            <p>&copy; @DateTime.Now.Year - SPEE FSPMI Batam System</p>
         </footer>
     </div>
 

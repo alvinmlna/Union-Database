@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.removeContainer = true;
+}
+
+<div id="tree" style="
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+">
+</div>
+
+@section scripts {
+    <script>
+        var myData = [{
+            "head": "Ketua",
+            "id": "aa",
+            "contents": "Masrial",
+            "children": [
+                {
+                    "head": "Sekertaris",
+                    "id": "a1",
+                    "contents": "Moch Imam"
+                },
+                {
+                    "head": "Lainnya",
+                    "id": "a2",
+                    "contents": "",
+                    "children": [
+                        {
+                            "head": "A-2-1",
+                            "id": "a21",
+                            "contents": "A-2-1 Contents",
+                            "children": [{
+                                "head": "ada",
+                                "id": "a211",
+                                "contents": "ada"
+                            }]
+                        },
+                        {
+                            "head": "A-2-2",
+                            "id": "a22",
+                            "contents": "A-2-1 Contents",
+                            "children": [{
+                                "head": "ada",
+                                "id": "a221",
+                                "contents": "ada"
+                            }]
+                        },
+                        {
+                            "head": "A-2-2",
+                            "id": "a23",
+                            "contents": "A-2-1 Contents",
+                            "children": [{
+                                "head": "ada",
+                                "id": "a231",
+                                "contents": "ada"
+                            }]
+                        },
+                        {
+                            "head": "A-2-2",
+                            "id": "a24",
+                            "contents": "A-2-1 Contents",
+                            "children": [{
+                                "head": "ada",
+                                "id": "a241",
+                                "contents": "ada"
+                            }]
+                        },
+                        {
+                            "head": "A-2-2",
+                            "id": "a25",
+                            "contents": "A-2-1 Contents",
+                            "children": [{
+                                "head": "ada",
+                                "id": "a251",
+                                "contents": "ada"
+                            }]
+                        },
+                        {
+                            "head": "A-2-2",
+                            "id": "a26",
+                            "contents": "A-2-1 Contents",
+                            "children": [{
+                                "head": "ada",
+                                "id": "a61",
+                                "contents": "ada"
+                            }]
+                        }
+                    ]
+                },
+                {
+                    "head": "Bendahara",
+                    "id": "a1",
+                    "contents": "Moch Imam"
+                }
+            ]
+        }]
+
+        $("#tree").jHTree({
+            callType: 'obj',
+            structureObj: myData,
+            zoomer: false,
+            nodeDropComplete: function (event, data) {
+            }
+        });
+    </script>
+
+}
