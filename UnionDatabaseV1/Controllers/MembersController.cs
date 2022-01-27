@@ -175,7 +175,8 @@ namespace UnionDatabaseV1.Controllers
             {
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                var puk = db.PUKs.FirstOrDefault(x => x.Id == member.PUK_ID);
+                return RedirectToAction("Index", new { puk = puk.PUK1 });
             }
             ViewBag.PUK_ID = new SelectList(db.PUKs, "Id", "PUK1", member.PUK_ID);
             return View(member);
