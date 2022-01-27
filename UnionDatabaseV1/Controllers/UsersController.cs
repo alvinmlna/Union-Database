@@ -96,14 +96,16 @@ namespace UnionDatabaseV1.Controllers
                 if (member != null)
                 {
                     user.MemberName = member.Name;
-                    if (user.Akses == (int)AccessEnum.Admin || user.Akses == (int)AccessEnum.Inti) //admin
+                    if (user.Akses == (int)AccessEnum.Admin)
+                    {
+                        user.PUK = user.PUK;
+                    }
+
+                    if (user.Akses == (int)AccessEnum.Inti)
                     {
                         user.PUK = null;
                     }
-                    else
-                    {
-                        user.Password = "";
-                    }
+
 
                     db.Users.Add(user);
                     db.SaveChanges();
@@ -151,16 +153,17 @@ namespace UnionDatabaseV1.Controllers
             {
                 var tobeUpdate = db.Users.FirstOrDefault(x => x.Id == user.Id);
                 tobeUpdate.Akses = user.Akses;
-                tobeUpdate.PUK = user.PUK;
 
-                if (user.Akses == (int)AccessEnum.Admin || user.Akses ==  (int)AccessEnum.Inti) //admin
+                tobeUpdate.Password = user.Password;
+
+                if (user.Akses == (int)AccessEnum.Admin)
+                {
+                    tobeUpdate.PUK = user.PUK;
+                }
+
+                if (user.Akses == (int)AccessEnum.Inti)
                 {
                     tobeUpdate.PUK = null;
-                    tobeUpdate.Password = user.Password;
-                }
-                    else
-                {
-                    tobeUpdate.Password = "";
                 }
 
                 db.Entry(tobeUpdate).State = EntityState.Modified;

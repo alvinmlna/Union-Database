@@ -1,40 +1,39 @@
 ﻿@model List<string>
 
 
-@*<li><a href="@Url.Action("Index", "Members", new { puk = "all" })">Semua Anggota</a></li>*@
 
-
-@*@foreach (var item in Model)
+@if (ViewBag.akses == 1)
 {
-    <li><a href="@Url.Action("Index", "Members", new { puk = item })">@item</a></li>
-}*@
-
-
-@{
     var total = Model.Count();
     var sub = total / 5;
 
     int col = 0;
+
+    <li class="dropdown nav-item">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management Anggota <b class="caret"></b></a>
+        <ul class="dropdown-menu multi-column columns-2">
+            <div class="row" style="width:1000px;">
+
+                @for (int i = 0; i < sub; i++)
+                {
+                    <div class="col-sm-3">
+                        <ul class="multi-column-dropdown">
+                            @for (int j = 0; j < 5; j++)
+                            {
+                                <li><a style="padding:10px;" href="@Url.Action("Index", "Members", new { puk = Model[col] })">@Model[col] </a></li>
+
+                                col += 1;
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </ul>
+    </li>
 }
-
-<li class="dropdown nav-item">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management Anggota <b class="caret"></b></a>
-    <ul class="dropdown-menu multi-column columns-2">
-        <div class="row" style="width:1000px;">
-
-            @for (int i = 0; i < sub; i++)
-            {
-                <div class="col-sm-3">
-                    <ul class="multi-column-dropdown">
-                        @for (int j = 0; j < 5; j++)
-                        {
-                            <li><a style="padding:10px;" href="@Url.Action("Index", "Members", new { puk = Model[col] })">@Model[col] </a></li>
-
-                            col += 1;
-                        }
-                    </ul>
-                </div>
-            }
-        </div>
-    </ul>
-</li>
+else if (ViewBag.akses == 2)
+{
+    <li class="dropdown nav-item">
+        <a href="@Url.Action("Index", "Members", new { puk = ViewBag.puk })" >Management Anggota</a>
+    </li>
+}
