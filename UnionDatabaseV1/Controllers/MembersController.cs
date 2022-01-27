@@ -34,8 +34,13 @@ namespace UnionDatabaseV1.Controllers
         }
 
         // GET: Members
-        public ActionResult Index(string searchString, string currentFilter, string puk, int? page)
+        public ActionResult Index(string searchString, string currentFilter, string puk, int? page, bool? isSuccess)
         {
+
+            if (isSuccess != null)
+            {
+                ViewBag.IsSuccess = true;
+            }
 
             //Area tidak boleh kosong
             if (string.IsNullOrEmpty(puk))
@@ -239,7 +244,7 @@ namespace UnionDatabaseV1.Controllers
         }
 
         [HttpPost]
-        public JsonResult UploadExcel(HttpPostedFileBase FileUpload, string puk)
+        public ActionResult UploadExcel(HttpPostedFileBase FileUpload, string puk)
         {
             var _PUK = db.PUKs.FirstOrDefault(x => x.PUK1 == puk);
             if (_PUK == null)
@@ -321,7 +326,7 @@ namespace UnionDatabaseV1.Controllers
                     {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    return Json("success", JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("Index", new { puk = puk , isSuccess  = true });
                 }
                 else
                 {

@@ -2,14 +2,14 @@
 
 
 
-@using (Html.BeginForm("UploadExcel", "Members", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+@using (Html.BeginForm("UploadExcel", "Members", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     <div class="form-horizontal">
         <div class="form-group">
             <div class="control-label col-md-12">
                 Download Format:
-                <a href="/Members/DownloadExcel/"><img src="~/Content/excel.png" width="25" height="25" title="Download Excel format" alt="excel" />Click here</a>
+                <a href="/Members/DownloadExcel/">@*<img src="~/Content/excel.png" width="25" height="25" title="Download Excel format" alt="excel" />*@Click here</a>
             </div>
         </div>
 

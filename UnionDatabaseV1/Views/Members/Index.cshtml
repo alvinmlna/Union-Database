@@ -5,7 +5,11 @@
 @{
     ViewBag.Title = "Manajemen Anggota";
 }
-
+@if(ViewBag.IsSuccess != null){
+     <script>
+         alert("Success");
+     </script>
+}
 <div class="section-title mt-20">
     <h5>Manajemen Anggota</h5>
 </div>
