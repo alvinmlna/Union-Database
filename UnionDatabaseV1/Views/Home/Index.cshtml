@@ -27,9 +27,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 
-<div>
-    Total Anggota: @ViewBag.TotalEmployee | L (@ViewBag.Male) - P (@ViewBag.Female)
-</div>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     @*<ol class="carousel-indicators">
@@ -42,6 +39,10 @@
     </ol>*@
     <div class="carousel-inner">
         <div class="carousel-item active">
+
+            <div>
+                Total Anggota: @ViewBag.TotalEmployee | L (@ViewBag.Male) - P (@ViewBag.Female)
+            </div>
             <canvas id="myChart"></canvas>
         </div>
         @foreach (var item in Model)
