@@ -28,8 +28,8 @@
 
                 @Html.DropDownListFor(x => x.Akses, new List<SelectListItem>
                 {
-                    new SelectListItem{ Text="Team Inti", Value = "1" },
-                    new SelectListItem{ Text="Admin PUK", Value = "2" },
+                    new SelectListItem{ Text="Admin 1", Value = "2" },
+                    new SelectListItem{ Text="Admin 2", Value = "1" }
                 }, new { @class = "form-control" })
 
                 @Html.ValidationMessageFor(model => model.Akses, "", new { @class = "text-danger" })
