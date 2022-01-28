@@ -1,0 +1,31 @@
+﻿@model UnionDatabaseV1.DAL.Kepengurusan
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Anda yakin akan menghapus data berikut?</h3>
+<div>
+    <h4>Kepengurusan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            PUK
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PUK.PUK1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Kembali ke List", "Index")
+        </div>
+    }
+</div>

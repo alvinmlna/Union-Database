@@ -1,0 +1,35 @@
+﻿@model IEnumerable<UnionDatabaseV1.DAL.Kepengurusan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List Kepengurusan</h2>
+
+<p>
+    @Html.ActionLink("Tambah Baru", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PUK.PUK1)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PUK.PUK1)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

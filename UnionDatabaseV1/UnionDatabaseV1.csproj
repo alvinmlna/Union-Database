@@ -167,6 +167,7 @@
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\PUKController.cs" />
     <Compile Include="Controllers\StructureChartController.cs" />
+    <Compile Include="Controllers\StructureManagementController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\AppDBContext.Context.cs">
       <AutoGen>True</AutoGen>
@@ -667,6 +668,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\StructureChart\Index.cshtml" />
+    <Content Include="Views\StructureManagement\Create.cshtml" />
+    <Content Include="Views\StructureManagement\Delete.cshtml" />
+    <Content Include="Views\StructureManagement\Edit.cshtml" />
+    <Content Include="Views\StructureManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
