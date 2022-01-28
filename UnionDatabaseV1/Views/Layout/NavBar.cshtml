@@ -3,16 +3,14 @@
 <li class="nav-item">
     <a href="@Url.Action("Index", "Home")">Beranda</a>
 </li>
-
+<li class="nav-item">
+    <a href="@Url.Action("Index", "StructureChart")">Kepengurusan</a>
+</li>
 
 
 @if (Model.Akses != 0)
 {
-
     @Html.Action("ManajemenAnggota", "Layout")
-
-
-
 }
 
 @if (Model.Akses == 1)
@@ -23,6 +21,7 @@
             <li><a href="@Url.Action("Index", "Puk")">PUK</a></li>
             <li><a href="@Url.Action("Index", "Users")">Akses</a></li>
             <li><a href="@Url.Action("Index", "FileManagers")">Manajemen File</a></li>
+            <li><a href="@Url.Action("Index", "StructureManagement", new { puk = "all" })">Manajemen Kepengurusan</a></li>
         </ul>
     </li>
 }

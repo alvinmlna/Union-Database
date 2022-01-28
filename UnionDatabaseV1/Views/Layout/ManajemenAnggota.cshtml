@@ -33,7 +33,14 @@
 }
 else if (ViewBag.akses == 2)
 {
-    <li class="dropdown nav-item">
-        <a href="@Url.Action("Index", "Members", new { puk = ViewBag.puk })" >Management Anggota</a>
+    <li class="nav-item">
+        <a href="#">Manajemen Data</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="@Url.Action("Index", "Members", new { puk = ViewBag.puk })">Management Anggota</a>
+            </li>
+            <li><a href="@Url.Action("Index", "StructureManagement", new { puk =  ViewBag.puk })">Manajemen Kepengurusan</a></li>
+        </ul>
     </li>
+
 }

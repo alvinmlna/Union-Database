@@ -123,6 +123,11 @@ namespace UnionDatabaseV1.Controllers
             {
                 return HttpNotFound();
             }
+
+            var akses = appCoreService.IsHaveAccessToThisArea(kepengurusan.PUK.PUK1);
+            if (akses == false)
+                return View("NoAccess");
+
             ViewBag.PUK_ID = new SelectList(db.PUKs, "Id", "PUK1", kepengurusan.PUK_ID);
             return View(kepengurusan);
         }
