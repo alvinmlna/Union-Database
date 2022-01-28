@@ -16,7 +16,7 @@ namespace UnionDatabaseV1.Controllers
     [UserAuthorization(Roles = "1")]
     public class FileManagersController : Controller
     {
-        private ConnectionString db = new ConnectionString();
+        private Entities db = new Entities();
 
         // GET: FileManagers
         public ActionResult Index()

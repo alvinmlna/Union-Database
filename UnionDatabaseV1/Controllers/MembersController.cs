@@ -23,7 +23,7 @@ namespace UnionDatabaseV1.Controllers
         private readonly IAppCoreService appCoreService;
         private readonly IMemberService memberService;
 
-        private ConnectionString db = new ConnectionString();
+        private Entities db = new Entities();
 
         public MembersController(
             IAppCoreService appCoreService,

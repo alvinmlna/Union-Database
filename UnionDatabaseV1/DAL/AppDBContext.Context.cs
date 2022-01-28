@@ -13,9 +13,9 @@ namespace UnionDatabaseV1.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ConnectionString : DbContext
+    public partial class Entities : DbContext
     {
-        public ConnectionString()
+        public Entities()
             : base("name=ConnectionString")
         {
         }
@@ -26,6 +26,7 @@ namespace UnionDatabaseV1.DAL
         }
     
         public virtual DbSet<FileManager> FileManagers { get; set; }
+        public virtual DbSet<Kepengurusan> Kepengurusans { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<PUK> PUKs { get; set; }
         public virtual DbSet<User> Users { get; set; }

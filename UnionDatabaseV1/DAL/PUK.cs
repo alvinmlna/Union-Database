@@ -18,6 +18,7 @@ namespace UnionDatabaseV1.DAL
         public PUK()
         {
             this.FileManager = new HashSet<FileManager>();
+            this.Kepengurusan = new HashSet<Kepengurusan>();
             this.Member = new HashSet<Member>();
             this.User = new HashSet<User>();
         }
@@ -27,6 +28,8 @@ namespace UnionDatabaseV1.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileManager> FileManager { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kepengurusan> Kepengurusan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

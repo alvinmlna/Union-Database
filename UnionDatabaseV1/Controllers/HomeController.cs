@@ -11,7 +11,7 @@ namespace UnionDatabaseV1.Controllers
 {
     public class HomeController : Controller
     {
-        private ConnectionString db = new ConnectionString();
+        private Entities db = new Entities();
         private IAppCoreService coreService;
         private IMemberService memberService;
 

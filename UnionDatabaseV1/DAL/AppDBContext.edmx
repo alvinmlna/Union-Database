@@ -13,7 +13,29 @@
           <Property Name="Path" Type="varchar(max)" Nullable="false" />
           <Property Name="Name" Type="varchar(max)" Nullable="false" />
           <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="PUK_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Kepengurusan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PUK_ID" Type="int" Nullable="false" />
+          <Property Name="Ketua" Type="varchar(max)" Nullable="false" />
+          <Property Name="Sekertaris" Type="varchar(max)" Nullable="false" />
+          <Property Name="Bendahara" Type="varchar(max)" Nullable="false" />
+          <Property Name="Waka1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Wasek1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Waka2" Type="varchar(max)" Nullable="false" />
+          <Property Name="Wasek2" Type="varchar(max)" Nullable="false" />
+          <Property Name="Waka3" Type="varchar(max)" Nullable="false" />
+          <Property Name="Wasek3" Type="varchar(max)" Nullable="false" />
+          <Property Name="Waka4" Type="varchar(max)" Nullable="false" />
+          <Property Name="Wasek4" Type="varchar(max)" Nullable="false" />
+          <Property Name="Waka5" Type="varchar(max)" Nullable="false" />
+          <Property Name="Wasek5" Type="varchar(max)" Nullable="false" />
+          <Property Name="Waka6" Type="varchar(max)" Nullable="false" />
+          <Property Name="Wasek6" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -43,7 +65,9 @@
           <Property Name="Password" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_FileManager_PUK">
-          <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="PUK" Type="Self.PUK" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="FileManager" Type="Self.FileManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUK">
@@ -54,8 +78,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Members_PUK">
+        <Association Name="FK_Kepengurusan_PUK">
           <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="Kepengurusan" Type="Self.Kepengurusan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kepengurusan">
+              <PropertyRef Name="PUK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_PUK">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Member" Type="Self.Member" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUK">
@@ -80,12 +118,17 @@
         </Association>
         <EntityContainer Name="attire_dbModelStoreContainer">
           <EntitySet Name="FileManager" EntityType="Self.FileManager" Schema="Union" store:Type="Tables" />
+          <EntitySet Name="Kepengurusan" EntityType="Self.Kepengurusan" Schema="Union" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="Union" store:Type="Tables" />
           <EntitySet Name="PUK" EntityType="Self.PUK" Schema="Union" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="Union" store:Type="Tables" />
           <AssociationSet Name="FK_FileManager_PUK" Association="Self.FK_FileManager_PUK">
             <End Role="PUK" EntitySet="PUK" />
             <End Role="FileManager" EntitySet="FileManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kepengurusan_PUK" Association="Self.FK_Kepengurusan_PUK">
+            <End Role="PUK" EntitySet="PUK" />
+            <End Role="Kepengurusan" EntitySet="Kepengurusan" />
           </AssociationSet>
           <AssociationSet Name="FK_Members_PUK" Association="Self.FK_Members_PUK">
             <End Role="PUK" EntitySet="PUK" />
@@ -109,8 +152,31 @@
           <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Category" Type="Int32" Nullable="false" />
-          <Property Name="PUK_ID" Type="Int32" Nullable="false" />
+          <Property Name="PUK_ID" Type="Int32" />
           <NavigationProperty Name="PUK" Relationship="Self.FK_FileManager_PUK" FromRole="FileManager" ToRole="PUK" />
+        </EntityType>
+        <EntityType Name="Kepengurusan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PUK_ID" Type="Int32" Nullable="false" />
+          <Property Name="Ketua" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sekertaris" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bendahara" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Waka1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wasek1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Waka2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wasek2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Waka3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wasek3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Waka4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wasek4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Waka5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wasek5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Waka6" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wasek6" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PUK" Relationship="Self.FK_Kepengurusan_PUK" FromRole="Kepengurusan" ToRole="PUK" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -129,6 +195,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PUK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="FileManager" Relationship="Self.FK_FileManager_PUK" FromRole="PUK" ToRole="FileManager" />
+          <NavigationProperty Name="Kepengurusan" Relationship="Self.FK_Kepengurusan_PUK" FromRole="PUK" ToRole="Kepengurusan" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Members_PUK" FromRole="PUK" ToRole="Member" />
           <NavigationProperty Name="User" Relationship="Self.FK_Users_Members" FromRole="PUK" ToRole="User" />
         </EntityType>
@@ -145,7 +212,9 @@
           <NavigationProperty Name="PUK1" Relationship="Self.FK_Users_Members" FromRole="User" ToRole="PUK" />
         </EntityType>
         <Association Name="FK_FileManager_PUK">
-          <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="PUK" Type="Self.PUK" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="FileManager" Type="Self.FileManager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUK">
@@ -156,8 +225,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Members_PUK">
+        <Association Name="FK_Kepengurusan_PUK">
           <End Role="PUK" Type="Self.PUK" Multiplicity="1" />
+          <End Role="Kepengurusan" Type="Self.Kepengurusan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PUK">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kepengurusan">
+              <PropertyRef Name="PUK_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_PUK">
+          <End Role="PUK" Type="Self.PUK" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Member" Type="Self.Member" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PUK">
@@ -180,14 +263,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ConnectionStrings" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FileManager" EntityType="Self.FileManager" />
+          <EntitySet Name="Kepengurusan" EntityType="Self.Kepengurusan" />
           <EntitySet Name="Member" EntityType="Self.Member" />
           <EntitySet Name="PUK" EntityType="Self.PUK" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_FileManager_PUK" Association="Self.FK_FileManager_PUK">
             <End Role="PUK" EntitySet="PUK" />
             <End Role="FileManager" EntitySet="FileManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kepengurusan_PUK" Association="Self.FK_Kepengurusan_PUK">
+            <End Role="PUK" EntitySet="PUK" />
+            <End Role="Kepengurusan" EntitySet="Kepengurusan" />
           </AssociationSet>
           <AssociationSet Name="FK_Members_PUK" Association="Self.FK_Members_PUK">
             <End Role="PUK" EntitySet="PUK" />
@@ -203,7 +291,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="attire_dbModelStoreContainer" CdmEntityContainer="ConnectionStrings">
+        <EntityContainerMapping StorageEntityContainer="attire_dbModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="FileManager">
             <EntityTypeMapping TypeName="attire_dbModel.FileManager">
               <MappingFragment StoreEntitySet="FileManager">
@@ -212,6 +300,29 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="PUK_ID" ColumnName="PUK_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kepengurusan">
+            <EntityTypeMapping TypeName="attire_dbModel.Kepengurusan">
+              <MappingFragment StoreEntitySet="Kepengurusan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PUK_ID" ColumnName="PUK_ID" />
+                <ScalarProperty Name="Ketua" ColumnName="Ketua" />
+                <ScalarProperty Name="Sekertaris" ColumnName="Sekertaris" />
+                <ScalarProperty Name="Bendahara" ColumnName="Bendahara" />
+                <ScalarProperty Name="Waka1" ColumnName="Waka1" />
+                <ScalarProperty Name="Wasek1" ColumnName="Wasek1" />
+                <ScalarProperty Name="Waka2" ColumnName="Waka2" />
+                <ScalarProperty Name="Wasek2" ColumnName="Wasek2" />
+                <ScalarProperty Name="Waka3" ColumnName="Waka3" />
+                <ScalarProperty Name="Wasek3" ColumnName="Wasek3" />
+                <ScalarProperty Name="Waka4" ColumnName="Waka4" />
+                <ScalarProperty Name="Wasek4" ColumnName="Wasek4" />
+                <ScalarProperty Name="Waka5" ColumnName="Waka5" />
+                <ScalarProperty Name="Wasek5" ColumnName="Wasek5" />
+                <ScalarProperty Name="Waka6" ColumnName="Waka6" />
+                <ScalarProperty Name="Wasek6" ColumnName="Wasek6" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

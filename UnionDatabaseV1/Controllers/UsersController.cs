@@ -17,7 +17,7 @@ namespace UnionDatabaseV1.Controllers
     [UserAuthorization(Roles = "1")]
     public class UsersController : Controller
     {
-        private ConnectionString db = new ConnectionString();
+        private Entities db = new Entities();
 
         private readonly IMemberService memberService;
         private readonly IAppCoreService appCoreService;

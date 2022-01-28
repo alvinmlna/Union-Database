@@ -9,9 +9,9 @@ namespace UnionDatabaseV1.Data.Services
 {
     public class MemberService : IMemberService
     {
-        private readonly ConnectionString context;
+        private readonly Entities context;
 
-        public MemberService(ConnectionString context)
+        public MemberService(Entities context)
         {
             this.context = context;
         }

@@ -15,7 +15,7 @@ namespace UnionDatabaseV1.Controllers
     [UserAuthorization(Roles = "1")]
     public class PUKController : Controller
     {
-        private ConnectionString db = new ConnectionString();
+        private Entities db = new Entities();
 
         // GET: PUK
         public ActionResult Index()

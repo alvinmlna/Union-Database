@@ -10,7 +10,7 @@ namespace UnionDatabaseV1.Controllers
 {
     public class LayoutController : Controller
     {
-        private ConnectionString db = new ConnectionString();
+        private Entities db = new Entities();
         private IAppCoreService appCoreService;
 
         public LayoutController(

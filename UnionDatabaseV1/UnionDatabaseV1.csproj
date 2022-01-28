@@ -186,6 +186,9 @@
     <Compile Include="DAL\FileManager.cs">
       <DependentUpon>AppDBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Kepengurusan.cs">
+      <DependentUpon>AppDBContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Member.cs">
       <DependentUpon>AppDBContext.tt</DependentUpon>
     </Compile>
@@ -503,13 +506,6 @@
     <Content Include="lib\fonts\fontawesome-webfont3e6e.woff2" />
     <Content Include="lib\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Content\Template.xlsx" />
-    <EntityDeploy Include="DAL\AppDBContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AppDBContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DAL\AppDBContext.edmx.diagram">
-      <DependentUpon>AppDBContext.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
@@ -517,6 +513,13 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\sample.json" />
+    <EntityDeploy Include="DAL\AppDBContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AppDBContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DAL\AppDBContext.edmx.diagram">
+      <DependentUpon>AppDBContext.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\STAGING.pubxml" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

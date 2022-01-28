@@ -9,11 +9,11 @@ namespace UnionDatabaseV1.Data.Services
 {
     public class AppCoreService : IAppCoreService
     {
-        private readonly ConnectionString db;
+        private readonly Entities db;
         private readonly IMemberService memberService;
 
         public AppCoreService(
-            ConnectionString db,
+            Entities db,
             IMemberService memberService)
         {
             this.db = db;
