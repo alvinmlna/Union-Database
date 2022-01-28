@@ -6,9 +6,13 @@
 
 <h2>List Kepengurusan</h2>
 
-<p>
-    @Html.ActionLink("Tambah Baru", "Create", null, new { @class = "btn btn-primary" })
-</p>
+@if ((ViewBag.IsAdmin1 != null && Model.Count() == 0) || ViewBag.IsAdmin1 == null)
+{
+    <p>
+        @Html.ActionLink("Tambah Baru", "Create", new { puk = ViewBag.puk }, new { @class = "btn btn-primary"})
+    </p>
+}
+
 <br />
 
 <table class="table">

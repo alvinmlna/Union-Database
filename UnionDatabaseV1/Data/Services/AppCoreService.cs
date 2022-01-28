@@ -89,7 +89,7 @@ namespace UnionDatabaseV1.Data.Services
                 return true;
             }
 
-            if (currentUser.Akses == 2 && currentUser.PUK == _puk.Id)
+            if (currentUser.Akses == 2 && currentUser.PUK == _puk?.Id)
             {
                 return true;
             }

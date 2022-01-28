@@ -7,18 +7,48 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UnionDatabaseV1.DAL;
+using UnionDatabaseV1.Data.Services;
 
 namespace UnionDatabaseV1.Controllers
 {
     public class StructureManagementController : Controller
     {
+        private readonly IAppCoreService appCoreService;
+
+        public StructureManagementController(IAppCoreService appCoreService)
+        {
+            this.appCoreService = appCoreService;
+        }
+        
         private Entities db = new Entities();
 
         // GET: StructureManagement
-        public ActionResult Index()
+        public ActionResult Index(string puk)
         {
-            var kepengurusan = db.Kepengurusans.Include(k => k.PUK);
-            return View(kepengurusan.ToList());
+            //Area tidak boleh kosong
+            if (string.IsNullOrEmpty(puk))
+                return View("Error");
+
+            var akses = appCoreService.IsHaveAccessToThisArea(puk);
+            if (akses == false)
+                return View("NoAccess");
+
+
+            ViewBag.puk = puk;
+            IEnumerable<Kepengurusan> kepengurusans;
+            if (puk == "all")
+            {
+                kepengurusans = db.Kepengurusans.Include(k => k.PUK);
+            }
+            else
+            {
+                kepengurusans = db.Kepengurusans.Include(k => k.PUK)
+                                .Where(x => x.PUK.PUK1 == puk);
+
+                ViewBag.IsAdmin1 = true;
+            }
+
+            return View(kepengurusans.ToList());
         }
 
         // GET: StructureManagement/Details/5
@@ -37,11 +67,26 @@ namespace UnionDatabaseV1.Controllers
         }
 
         // GET: StructureManagement/Create
-        public ActionResult Create()
+        public ActionResult Create(string puk)
         {
-            //jadi yang tampil hanya yang belum didaftarkan aja
-            var allRegistered = db.Kepengurusans.Select(x => x.PUK_ID).ToList();
-            ViewBag.PUK_ID = new SelectList(db.PUKs.Where(x => !allRegistered.Contains(x.Id)), "Id", "PUK1");
+            //Area tidak boleh kosong
+            if (string.IsNullOrEmpty(puk))
+                return View("Error");
+
+            var akses = appCoreService.IsHaveAccessToThisArea(puk);
+            if (akses == false)
+                return View("NoAccess");
+
+            if (puk == "all")
+            {
+                //jadi yang tampil hanya yang belum didaftarkan aja
+                var allRegistered = db.Kepengurusans.Select(x => x.PUK_ID).ToList();
+                ViewBag.PUK_ID = new SelectList(db.PUKs.Where(x => !allRegistered.Contains(x.Id)), "Id", "PUK1");
+            }
+            else
+            {
+                ViewBag.PUK_ID = new SelectList(db.PUKs.Where(x => x.PUK1 == puk), "Id", "PUK1");
+            }
             return View();
         }
 
