@@ -12,9 +12,7 @@
     @Html.Action("ManajemenAnggota", "Layout")
 
 
-    <li class="nav-item">
-        <ul class="sub-menu"></ul>
-    </li>
+
 }
 
 @if (Model.Akses == 1)
@@ -26,6 +24,13 @@
             <li><a href="@Url.Action("Index", "Users")">Akses</a></li>
             <li><a href="@Url.Action("Index", "FileManagers")">Manajemen File</a></li>
         </ul>
+    </li>
+}
+
+@if (Model.Akses == 3)
+{
+    <li class="nav-item">
+        <a href="@Url.Action("Index", "StructureChart")">Kepengurusan</a>
     </li>
 }
 

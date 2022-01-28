@@ -1,109 +1,122 @@
 ﻿
-@{
+@{ 
     ViewBag.removeContainer = true;
 }
 
-<div id="tree" style="
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-">
-</div>
+<style>
+    #chart-container {
+        position: relative;
+        font-family: Arial;
+        height: 440px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        overflow: auto;
+        text-align: center;
+    }
+
+    .orgchart {
+        padding-bottom: 20px;
+        background:none!important;
+    }
+
+        .orgchart .node .content {
+            background-color: #fff;
+            color: #000;
+            width: 155px;
+            height: 35px !important;
+            border-radius: 0;
+            white-space: pre-wrap !important;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .orgchart .node .title {
+            width: 155px !important;
+            height: 30px !important;
+            display:flex;
+            align-content:center;
+            justify-content:center;
+            flex-direction:column;
+        }
+
+        .oci {
+            display:none!important;
+        }
+</style>
+    
+
+<div id="chart-container"></div>
+
 
 @section scripts {
-    <script>
-        var myData = [{
-            "head": "Ketua",
-            "id": "aa",
-            "contents": "Masrial",
-            "children": [
-                {
-                    "head": "Sekertaris",
-                    "id": "a1",
-                    "contents": "Moch Imam"
-                },
-                {
-                    "head": "Lainnya",
-                    "id": "a2",
-                    "contents": "",
-                    "children": [
-                        {
-                            "head": "A-2-1",
-                            "id": "a21",
-                            "contents": "A-2-1 Contents",
-                            "children": [{
-                                "head": "ada",
-                                "id": "a211",
-                                "contents": "ada"
-                            }]
-                        },
-                        {
-                            "head": "A-2-2",
-                            "id": "a22",
-                            "contents": "A-2-1 Contents",
-                            "children": [{
-                                "head": "ada",
-                                "id": "a221",
-                                "contents": "ada"
-                            }]
-                        },
-                        {
-                            "head": "A-2-2",
-                            "id": "a23",
-                            "contents": "A-2-1 Contents",
-                            "children": [{
-                                "head": "ada",
-                                "id": "a231",
-                                "contents": "ada"
-                            }]
-                        },
-                        {
-                            "head": "A-2-2",
-                            "id": "a24",
-                            "contents": "A-2-1 Contents",
-                            "children": [{
-                                "head": "ada",
-                                "id": "a241",
-                                "contents": "ada"
-                            }]
-                        },
-                        {
-                            "head": "A-2-2",
-                            "id": "a25",
-                            "contents": "A-2-1 Contents",
-                            "children": [{
-                                "head": "ada",
-                                "id": "a251",
-                                "contents": "ada"
-                            }]
-                        },
-                        {
-                            "head": "A-2-2",
-                            "id": "a26",
-                            "contents": "A-2-1 Contents",
-                            "children": [{
-                                "head": "ada",
-                                "id": "a61",
-                                "contents": "ada"
-                            }]
-                        }
-                    ]
-                },
-                {
-                    "head": "Bendahara",
-                    "id": "a1",
-                    "contents": "Moch Imam"
-                }
-            ]
-        }]
 
-        $("#tree").jHTree({
-            callType: 'obj',
-            structureObj: myData,
-            zoomer: false,
-            nodeDropComplete: function (event, data) {
-            }
-        });
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/css/jquery.orgchart.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/js/jquery.orgchart.min.js"></script>
+    <script>
+        (function ($) {
+            $(function () {
+                var ds = {
+                    'name': 'Masrial',
+                    'title': 'Ketua',
+                    'children': [
+                        {
+                            'name': 'Lainnya', 'title': '',
+                            'children': [
+                                {
+                                    'name': 'Agus Saputra S.Kom', 'title': 'Waka Bidang I Pendidikan',
+                                    'children': [
+                                        { 'name': 'Tionom Nainggolan', 'title': 'Wasek Bidang I Pendidikan' }
+                                    ]
+                                },
+                                {
+                                    'name': 'Ondri Eka Putra', 'title': 'Waka Bidang II Organisasi',
+                                    'children': [
+                                        { 'name': 'Slamet Riadi', 'title': 'Wasek Bidang II Organisasi' }
+                                    ]
+                                },
+                                {
+                                    'name': 'Cok Bery S.H', 'title': 'Waka Bidang III Hukum dan Pembelaan',
+                                    'children': [
+                                        { 'name': 'Sugeng Purwanto S.H', 'title': 'Wasek Bidang III Hukum dan Pembelaan' }
+                                    ]
+                                },
+                                {
+                                    'name': 'Yapet Ramon, S.E', 'title': 'Waka Bidang IV PKB dan K2',
+                                    'children': [
+                                        { 'name': 'Yuliyanto, S.T', 'title': 'Wasek Bidang IV PKB dan K2' }
+                                    ]
+                                },
+                                {
+                                    'name': 'Suminto', 'title': 'Waka Bidang V Infokum dan Sosek',
+                                    'children': [
+                                        { 'name': 'Danu Rubianto', 'title': 'Wasek Bidang V Infokum dan Sosek' }
+                                    ]
+                                },
+                                {
+                                    'name': 'Sri Mulyani', 'title': 'Waka Bidang VI Pemberdayaan Perempuan',
+                                    'children': [
+                                        { 'name': 'Retno Dwie Handarinie', 'title': 'Wasek Bidang VI Pemberdayaan Perempuan' }
+                                    ]
+                                },
+                            ]
+                        },
+                        { 'name': 'Moch Imam Zaenuri, S.Pd', 'title': 'Sekertaris' },
+                        { 'name': 'Asrul Rosaldi, A.Md', 'title': 'Bendahara' }
+                    ]
+                };
+
+                var oc = $('#chart-container').orgchart({
+                    'data': ds,
+                    'depth': 2,
+                    'nodeContent': 'title'
+                });
+
+            });
+        })(jQuery);
+
     </script>
 
 }

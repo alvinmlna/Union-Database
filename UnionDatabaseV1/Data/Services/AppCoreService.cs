@@ -34,7 +34,7 @@ namespace UnionDatabaseV1.Data.Services
                     var registeredMember = db.Members.FirstOrDefault(x => x.MemberID == memberId);
                     User anonymous = new User
                     {
-                        Akses = 0,
+                        Akses = 3,
                         MemberID = registeredMember.MemberID,
                         MemberName = registeredMember.Name,
                     };
