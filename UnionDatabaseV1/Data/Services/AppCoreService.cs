@@ -101,5 +101,15 @@ namespace UnionDatabaseV1.Data.Services
         {
             HttpContext.Current.Session["CurrentUser"] = null;
         }
+
+        public bool IsUser(AccessEnum val)
+        {
+            var currUser = GetCurrentUser();
+
+            if (currUser?.Akses == (int)val)
+                return true;
+
+            return false;
+        }
     }
 }

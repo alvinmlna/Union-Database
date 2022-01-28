@@ -101,7 +101,16 @@ namespace UnionDatabaseV1.Controllers
             {
                 db.Kepengurusans.Add(kepengurusan);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+                if (appCoreService.IsUser(Data._enum.AccessEnum.Inti))
+                {
+                    return RedirectToAction("Index", new { puk = "all" });
+                } else
+                {
+                    var _PUK = db.PUKs.FirstOrDefault(x => x.Id == kepengurusan.PUK_ID);
+                    return RedirectToAction("Index", new { puk = _PUK.PUK1 });
+                }
             }
 
             //jadi yang tampil hanya yang belum didaftarkan aja
@@ -143,7 +152,16 @@ namespace UnionDatabaseV1.Controllers
             {
                 db.Entry(kepengurusan).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (appCoreService.IsUser(Data._enum.AccessEnum.Inti))
+                {
+                    return RedirectToAction("Index", new { puk = "all" });
+                }
+                else
+                {
+                    var _PUK = db.PUKs.FirstOrDefault(x => x.Id == kepengurusan.PUK_ID);
+                    return RedirectToAction("Index", new { puk = _PUK.PUK1 });
+                }
             }
             ViewBag.PUK_ID = new SelectList(db.PUKs, "Id", "PUK1", kepengurusan.PUK_ID);
             return View(kepengurusan);
