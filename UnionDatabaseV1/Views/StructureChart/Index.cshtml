@@ -8,6 +8,9 @@
     @Html.Hidden("areaId", null, new { @id = "pukName" })
 }
 
+<div style="display:flex;justify-content:center" class="mb-10">
+    <h3>@ViewBag.Name</h3>
+</div>
 
 @{
     ViewBag.removeContainer = true;
@@ -66,7 +69,8 @@
 
     <script>
         $("body").on("change", "#ddlPUK", function () {
-            $("#areaId").val($(this).find("option:selected").val());
+            var value = $(this).find("option:selected").val();
+            $("#pukName").val(value);
             document.forms["Form1"].submit();
         });
 

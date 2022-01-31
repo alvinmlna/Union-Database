@@ -20,6 +20,7 @@ namespace UnionDatabaseV1.Controllers
             List<PUK> puks = db.Kepengurusans.Include("puk").Select(x => x.PUK).ToList();
 
             ViewBag.areaId = puks.FirstOrDefault().Id;
+            ViewBag.Name = puks.FirstOrDefault().PUK1;
             return View(puks);
         }
 
@@ -27,6 +28,7 @@ namespace UnionDatabaseV1.Controllers
         public ActionResult Chart(int areaId)
         {
             ViewBag.areaId = areaId;
+            ViewBag.Name = db.PUKs.FirstOrDefault(x => x.Id == areaId).PUK1;
             List<PUK> puks = db.Kepengurusans.Include("puk").Select(x => x.PUK).ToList();
             return View("Index", puks);
         }
