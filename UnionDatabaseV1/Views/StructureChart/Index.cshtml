@@ -1,5 +1,15 @@
 ﻿
-@{ 
+@using (Html.BeginForm("Chart", "StructureChart", FormMethod.Post, new { @name = "Form1" }))
+{
+    <div class="col-md-3 mb-10">
+            @Html.DropDownList("PUK", new SelectList(Model, "Id", "PUK1"), "Please select", new { @id = "ddlPUK", @class = "form-control" })
+    </div>
+
+    @Html.Hidden("areaId", null, new { @id = "pukName" })
+}
+
+
+@{
     ViewBag.removeContainer = true;
 }
 
@@ -16,7 +26,7 @@
 
     .orgchart {
         padding-bottom: 20px;
-        background:none!important;
+        background: none !important;
     }
 
         .orgchart .node .content {
@@ -35,88 +45,39 @@
         .orgchart .node .title {
             width: 155px !important;
             height: 30px !important;
-            display:flex;
-            align-content:center;
-            justify-content:center;
-            flex-direction:column;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
-        .oci {
-            display:none!important;
-        }
+    .oci {
+        display: none !important;
+    }
 </style>
-    
+
 
 <div id="chart-container"></div>
 
 
-@section scripts {
-
-
+@section scripts {    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/css/jquery.orgchart.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/js/jquery.orgchart.min.js"></script>
+
     <script>
+        $("body").on("change", "#ddlPUK", function () {
+            $("#areaId").val($(this).find("option:selected").val());
+            document.forms["Form1"].submit();
+        });
+
         (function ($) {
             $(function () {
-                var ds = {
-                    'name': 'Masrial',
-                    'title': 'Ketua',
-                    'children': [
-                        {
-                            'name': 'Lainnya', 'title': '',
-                            'children': [
-                                {
-                                    'name': 'Agus Saputra S.Kom', 'title': 'Waka Bidang I Pendidikan',
-                                    'children': [
-                                        { 'name': 'Tionom Nainggolan', 'title': 'Wasek Bidang I Pendidikan' }
-                                    ]
-                                },
-                                {
-                                    'name': 'Ondri Eka Putra', 'title': 'Waka Bidang II Organisasi',
-                                    'children': [
-                                        { 'name': 'Slamet Riadi', 'title': 'Wasek Bidang II Organisasi' }
-                                    ]
-                                },
-                                {
-                                    'name': 'Cok Bery S.H', 'title': 'Waka Bidang III Hukum dan Pembelaan',
-                                    'children': [
-                                        { 'name': 'Sugeng Purwanto S.H', 'title': 'Wasek Bidang III Hukum dan Pembelaan' }
-                                    ]
-                                },
-                                {
-                                    'name': 'Yapet Ramon, S.E', 'title': 'Waka Bidang IV PKB dan K2',
-                                    'children': [
-                                        { 'name': 'Yuliyanto, S.T', 'title': 'Wasek Bidang IV PKB dan K2' }
-                                    ]
-                                },
-                                {
-                                    'name': 'Suminto', 'title': 'Waka Bidang V Infokum dan Sosek',
-                                    'children': [
-                                        { 'name': 'Danu Rubianto', 'title': 'Wasek Bidang V Infokum dan Sosek' }
-                                    ]
-                                },
-                                {
-                                    'name': 'Sri Mulyani', 'title': 'Waka Bidang VI Pemberdayaan Perempuan',
-                                    'children': [
-                                        { 'name': 'Retno Dwie Handarinie', 'title': 'Wasek Bidang VI Pemberdayaan Perempuan' }
-                                    ]
-                                },
-                            ]
-                        },
-                        { 'name': 'Moch Imam Zaenuri, S.Pd', 'title': 'Sekertaris' },
-                        { 'name': 'Asrul Rosaldi, A.Md', 'title': 'Bendahara' }
-                    ]
-                };
-
                 var oc = $('#chart-container').orgchart({
-                    'data': ds,
+                    'data': '@Url.Action("ShowChart", "StructureChart", new { areaId = ViewBag.areaId })',
                     'depth': 2,
                     'nodeContent': 'title'
                 });
-
             });
         })(jQuery);
-
     </script>
-
 }
