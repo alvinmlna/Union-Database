@@ -243,6 +243,17 @@ namespace UnionDatabaseV1.Controllers
             return View();
         }
 
+        public string FirstLetterToUpper(string str)
+        {
+            if (str == null)
+                return null;
+
+            if (str.Length > 1)
+                return char.ToUpper(str[0]) + str.Substring(1);
+
+            return str.ToUpper();
+        }
+
         [HttpPost]
         public ActionResult UploadExcel(HttpPostedFileBase FileUpload, string puk)
         {
@@ -293,8 +304,20 @@ namespace UnionDatabaseV1.Controllers
                             {
                                 Member TU = new Member();
                                 TU.MemberID = a.MemberID;
-                                TU.Name = a.Name;
-                                TU.Gender = a.Gender;
+                                TU.Name = FirstLetterToUpper(a.Name);
+
+                                String str = a.Gender;
+                                String gender = "";
+                                if (str.IndexOf("L", StringComparison.CurrentCultureIgnoreCase) != -1) {
+                                    gender = "Laki-laki";
+                                }
+                                    else if (str.IndexOf("P", StringComparison.CurrentCultureIgnoreCase) != -1)
+                                {
+                                    gender = "Perempuan";
+                                }
+
+                                TU.Gender = gender;
+
                                 TU.PUK_ID = _PUK.Id;
                                 db.Members.Add(TU);
                                 db.SaveChanges();
