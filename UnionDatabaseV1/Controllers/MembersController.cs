@@ -208,9 +208,12 @@ namespace UnionDatabaseV1.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Member member = db.Members.Find(id);
+
+            var PUK = member.PUK.PUK1;
+
             db.Members.Remove(member);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { puk = PUK });
         }
 
         protected override void Dispose(bool disposing)
