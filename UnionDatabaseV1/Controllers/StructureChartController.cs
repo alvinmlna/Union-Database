@@ -131,13 +131,13 @@ namespace UnionDatabaseV1.Controllers
                     },
                     new StructureChartJson
                     {
-                        name = kepengurusan.Bendahara,
-                        title = "Bendahara"
+                        name = kepengurusan.Sekertaris,
+                        title = "Sekertaris"
                     },
                     new StructureChartJson
                     {
-                        name = kepengurusan.Sekertaris,
-                        title = "Sekertaris"
+                        name = kepengurusan.Bendahara,
+                        title = "Bendahara"
                     }
                 }
             };
