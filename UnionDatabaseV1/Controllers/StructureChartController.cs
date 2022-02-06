@@ -24,6 +24,11 @@ namespace UnionDatabaseV1.Controllers
             return View(puks);
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Chart(int areaId)
         {
