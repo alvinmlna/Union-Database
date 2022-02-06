@@ -431,7 +431,6 @@
     <Content Include="Views\StructureManagement\Index.cshtml" />
     <Content Include="Views\FileManagers\Create.cshtml" />
     <Content Include="Views\FileManagers\Details.cshtml" />
-    <Content Include="Views\FileManagers\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
