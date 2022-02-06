@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using UnionDatabaseV1.DAL;
 using UnionDatabaseV1.Data.Services;
+using UnionDatabaseV1.Security;
 
 namespace UnionDatabaseV1.Controllers
 {
+    [UserAuthorization(Roles = "1,2")]
     public class StructureManagementController : Controller
     {
         private readonly IAppCoreService appCoreService;

@@ -11,7 +11,6 @@ namespace UnionDatabaseV1.DAL
     {
         public int Id { get; set; }
 
-        [Required]
         public string Path { get; set; }
 
         [Required]
