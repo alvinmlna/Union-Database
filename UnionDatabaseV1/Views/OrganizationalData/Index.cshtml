@@ -1,0 +1,38 @@
+﻿@model IEnumerable<UnionDatabaseV1.DAL.FileManager>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="section-title mt-20">
+    <h5>Data Organisasi</h5>
+</div>
+
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            File
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @*<img src="@Url.Content("/UploadedFiles/" + item.Path)" alt="" height=100 width=200 />*@
+            </td>
+            <td>
+                @Html.ActionLink("Update", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
