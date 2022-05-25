@@ -61,5 +61,20 @@ namespace UnionDatabaseV1.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Download(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            FileManager fileManager = db.FileManagers.Find(id);
+            string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileManager.Path);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(_path);
+            string fileName = fileManager.Path;
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
     }
 }

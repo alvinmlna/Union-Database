@@ -27,7 +27,10 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @*<img src="@Url.Content("/UploadedFiles/" + item.Path)" alt="" height=100 width=200 />*@
+                @if (string.IsNullOrEmpty(item.Path) == false)
+                {
+                    @Html.ActionLink("Download File", "Download", new { id = item.Id })
+                }
             </td>
             <td>
                 @Html.ActionLink("Update", "Edit", new { id = item.Id })
