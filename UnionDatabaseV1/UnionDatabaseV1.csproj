@@ -322,6 +322,7 @@
     <Content Include="ApplicationInsights.config" />
     <Content Include="Views\OrganizationalData\Index.cshtml" />
     <Content Include="Views\OrganizationalData\Edit.cshtml" />
+    <Content Include="Views\OrganizationalData\Show.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

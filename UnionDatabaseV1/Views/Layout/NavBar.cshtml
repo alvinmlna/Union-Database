@@ -11,6 +11,14 @@
     <li class="nav-item">
         <a href="@Url.Action("Index", "StructureChart")">Kepengurusan</a>
     </li>
+
+    if (Model.Akses != 1)
+    {
+        <li class="nav-item">
+            <a href="@Url.Action("Show", "OrganizationalData")">Data Organisasi</a>
+        </li>
+    }
+
 }
 
 @if (Model.Akses == 1)
@@ -21,6 +29,7 @@
             <li><a href="@Url.Action("Index", "Puk")">PUK</a></li>
             <li><a href="@Url.Action("Index", "Users")">Akses</a></li>
             <li><a href="@Url.Action("Index", "FileManagers")">Manajemen File</a></li>
+            <li><a href="@Url.Action("Index", "OrganizationalData")">Data Organisasi</a></li>
             <li><a href="@Url.Action("Index", "StructureManagement", new { puk = "all" })">Manajemen Kepengurusan</a></li>
         </ul>
     </li>

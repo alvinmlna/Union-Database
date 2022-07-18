@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UnionDatabaseV1.DAL;
+using UnionDatabaseV1.Security;
 
 namespace UnionDatabaseV1.Controllers
 {
@@ -13,7 +14,18 @@ namespace UnionDatabaseV1.Controllers
         Entities db = new Entities();
 
         // GET: OrganizationalData
+
+        [UserAuthorization(Roles = "1")]
         public ActionResult Index()
+        {
+            var allData = db.FileManagers.Where(x => x.Category == 3)
+                .OrderBy(x => x.Name)
+                .ToList();
+
+            return View(allData);
+        }
+
+        public ActionResult Show()
         {
             var allData = db.FileManagers.Where(x => x.Category == 3)
                 .OrderBy(x => x.Name)
@@ -44,10 +56,13 @@ namespace UnionDatabaseV1.Controllers
 
             if (file != null)
             {
-                string _pathToDelete = Path.Combine(Server.MapPath("~/UploadedFiles"), fileManager.Path);
-                if (System.IO.File.Exists(_pathToDelete))
+                if (string.IsNullOrEmpty(fileManager.Path) == false)
                 {
-                    System.IO.File.Delete(_pathToDelete);
+                    string _pathToDelete = Path.Combine(Server.MapPath("~/UploadedFiles"), fileManager.Path);
+                    if (System.IO.File.Exists(_pathToDelete))
+                    {
+                        System.IO.File.Delete(_pathToDelete);
+                    }
                 }
 
                 string _FileName = Path.GetRandomFileName() + " " + Path.GetFileName(file.FileName);
