@@ -227,8 +227,8 @@ namespace UnionDatabaseV1.Controllers
 
         public FileResult DownloadExcel()
         {
-            string path = "/Content/Template.xlsx";
-            return File(path, "application/vnd.ms-excel", "UploadTemplate.xlsx");
+            string path = "/Content/Template.xls";
+            return File(path, "application/vnd.ms-excel", "UploadTemplate.xls");
         }
 
         public ActionResult Upload(string puk)

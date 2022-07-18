@@ -21,7 +21,7 @@ namespace UnionDatabaseV1.Controllers
         // GET: FileManagers
         public ActionResult Index()
         {
-            var fileManagers = db.FileManagers;
+            var fileManagers = db.FileManagers.Where(x => x.Category != 3);
             return View(fileManagers.ToList());
         }
 
