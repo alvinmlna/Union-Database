@@ -1,4 +1,5 @@
-﻿using LinqToExcel;
+﻿using ClosedXML.Excel;
+using LinqToExcel;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -384,6 +386,43 @@ namespace UnionDatabaseV1.Controllers
                 });
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public FileResult Export(string hiddenPUK)
+        {
+            IEnumerable<Member> members;
+            if (hiddenPUK == "all")
+            {
+                members = db.Members
+                    .Include(m => m.PUK);
+            }
+            else
+            {
+                members = db.Members
+                    .Include(m => m.PUK)
+                    .Where(x => x.PUK.PUK1 == hiddenPUK);
+            }
+
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("Nomor Anggota"),
+                                            new DataColumn("Nama"),
+                                            new DataColumn("Jenis Kelamin") });
+
+            foreach (var m in members)
+            {
+                dt.Rows.Add(m.MemberID, m.Name, m.Gender);
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Export.xlsx");
+                }
+            }
         }
     }
 }

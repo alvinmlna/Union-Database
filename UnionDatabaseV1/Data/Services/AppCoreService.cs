@@ -37,6 +37,7 @@ namespace UnionDatabaseV1.Data.Services
                         Akses = 3,
                         MemberID = registeredMember.MemberID,
                         MemberName = registeredMember.Name,
+                        PUK = registeredMember.PUK_ID
                     };
                     return anonymous;
                 }

@@ -18,10 +18,18 @@
 
 @if (ViewBag.puk != "all")
 {
-    <div style="float:left">
-        @Html.ActionLink("Tambah Manual", "Create", new { puk = ViewBag.puk }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Upload Excel", "Upload", new { puk = ViewBag.puk }, new { @class = "btn btn-primary" })
-    </div>
+<div style="float:left">
+    @Html.ActionLink("Tambah Manual", "Create", new { puk = ViewBag.puk }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Upload Excel", "Upload", new { puk = ViewBag.puk }, new { @class = "btn btn-primary" })
+
+    <br />
+    <br />
+    @using (Html.BeginForm("Export", "Members", FormMethod.Post))
+    {
+        @Html.Hidden("hiddenPUK", ViewBag.puk as string)
+        <input type="submit" class="btn btn-secondary" value="Export" />
+    }
+</div>
 }
 
 <div style="float:right;">
@@ -31,7 +39,7 @@
             @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
             @Html.TextBox("puk", ViewBag.puk as string, new { @style = "display:none" })
 
-            <input type="submit" class="btn btn-primary" value="Cari" />
+            <input type="submit"  class="btn btn-primary" value="Cari" />
         </div>
     }
 </div>
